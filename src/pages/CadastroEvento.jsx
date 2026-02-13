@@ -9,6 +9,13 @@ export default function CadastroEvento({ onAdd }) {
   //questao 1
   const [descricao, setDescricao] = useState("");
 
+  function limparFormulario() {
+    setTitulo("");
+    setData("");
+    setLocal("");
+    setDescricao("");
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -50,6 +57,9 @@ export default function CadastroEvento({ onAdd }) {
           <button className="btn" type="submit">Salvar</button>
           <button className="btn ghost" type="button" onClick={() => navigate("/evento")}>
             Cancelar
+          </button>
+          <button type="button" className="btn danger" onClick={limparFormulario} >
+            Limpar
           </button>
         </div>
       </form>

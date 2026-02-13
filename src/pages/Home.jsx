@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Home({ total }) {
+export default function Home({ total, PrimeiroEvento }) {
   return (
     <section className="stack">
       <h2>Bem-vindos </h2>
@@ -8,6 +8,10 @@ export default function Home({ total }) {
       <div className="box">
         Total de eventos cadastrados: <strong>{total}</strong>
       </div>
+      <div>
+        Proximo evento: {PrimeiroEvento}
+      </div>
     </section>
+    
   );
 }

@@ -31,7 +31,7 @@ export default function App() {
 
       <main className="conteudo-principal">
         <Routes>
-          <Route path="/" element={<Home total={eventos.length} />} />
+          <Route path="/" element={<Home total={eventos.length} PrimeiroEvento={eventos[eventos.length-1]?.titulo}/>} />
           <Route path="/evento" element={<Evento eventos={eventos} onRemover={removerEvento} />} />
           <Route path="/cadastrar" element={<CadastroEvento onAdd={adicionarEvento} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
