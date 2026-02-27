@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import Evento from "./pages/Evento";
 import CadastroEvento from "./pages/CadastroEvento";
 
+import EventoDetalhe from "./pages/EventoDetalhe";
+
 export default function App() {
   const [eventos, setEventos] = useState([
     { id: 1, titulo: "Reunião do Projeto", data: "2026-02-12", local: "Sala 2" },
@@ -18,6 +20,18 @@ export default function App() {
   function adicionarEvento(novo) {
     const eventoComId = { id: Date.now(), ...novo };
     setEventos((lista) => [eventoComId, ...lista]);
+  }
+
+  // Função para editar um evento existente
+  function editarEvento(eventoEditado) {
+    // Atualiza o evento na lista e marca como editado
+    setEventos((lista) =>
+      lista.map((e) => 
+        e.id === eventoEditado.id 
+          ? { ...eventoEditado, editado: true } 
+          : e
+      )
+    );
   }
 
   function removerEvento(id) {
@@ -40,8 +54,9 @@ export default function App() {
       <main className="conteudo-principal">
         <Routes>
           <Route path="/" element={<Home total={eventos.length} PrimeiroEvento={eventos[eventos.length-1]?.titulo}/>} />
-          <Route path="/evento" element={<Evento eventos={eventos} onRemover={removerEvento} 0/>} />
-          <Route path="/cadastrar" element={<CadastroEvento onAdd={adicionarEvento} />} />
+          <Route path="/evento" element={<Evento eventos={eventos} onRemover={removerEvento} onRemoverTodos={removerTodosEventos}/>} />
+          <Route path="/eventos/:id" element={<EventoDetalhe eventos={eventos} />}/>
+          <Route path="/cadastrar" element={<CadastroEvento onAdd={adicionarEvento} onEdit={editarEvento} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

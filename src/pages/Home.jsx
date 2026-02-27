@@ -12,6 +12,5 @@ export default function Home({ total, PrimeiroEvento }) {
         Proximo evento: {PrimeiroEvento}
       </div>
     </section>
-    
   );
 }
