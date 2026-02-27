@@ -24,6 +24,14 @@ export default function App() {
     setEventos((lista) => lista.filter((e) => e.id !== id));
   }
 
+  function removerTodosEventos() {
+    const confirmar = window.confirm("Tem certeza que deseja remover todos os eventos?");
+    
+    if (confirmar) {
+      setEventos([]);
+    }
+  }
+
   return (
     <div className="app">
       <Header />
@@ -32,7 +40,7 @@ export default function App() {
       <main className="conteudo-principal">
         <Routes>
           <Route path="/" element={<Home total={eventos.length} PrimeiroEvento={eventos[eventos.length-1]?.titulo}/>} />
-          <Route path="/evento" element={<Evento eventos={eventos} onRemover={removerEvento} />} />
+          <Route path="/evento" element={<Evento eventos={eventos} onRemover={removerEvento} 0/>} />
           <Route path="/cadastrar" element={<CadastroEvento onAdd={adicionarEvento} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

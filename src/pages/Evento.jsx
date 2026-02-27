@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import CardEvento from "../components/CardEvento";
 
-export default function Evento({ eventos, onRemover }) {
+export default function Evento({ eventos, onRemover, onRemoverTodos }) {
+
 
   const [filtro, setFiltro] = useState("");
   const [filtroLocal, setLocal] = useState("");
@@ -9,7 +10,9 @@ export default function Evento({ eventos, onRemover }) {
   const eventosFiltrados = eventos
     .filter(evento => evento.titulo.toLowerCase().includes(filtro.toLowerCase()))
     .filter(evento => evento.local.toLowerCase().includes(filtroLocal.toLowerCase()));
-    
+  
+  console.log(onRemoverTodos);
+
   return (
     <section className="stack">
       <h2>Eventos</h2>
@@ -29,6 +32,13 @@ export default function Evento({ eventos, onRemover }) {
         value={filtroLocal} 
         placeholder="Filtre eventos por local aqui" 
       />
+
+      <button 
+        type="button" 
+        className="btn danger"
+        onClick={onRemoverTodos} >
+        Remover todos os Eventos
+      </button>
 
       {eventos.length === 0 ? (
         <p className="muted">Nenhum evento cadastrado. Vá em “Cadastrar”.</p>
